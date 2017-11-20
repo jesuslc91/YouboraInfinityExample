@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- VideoJS -->
+    <link href="http://vjs.zencdn.net/6.4.0/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/6.4.0/video.js"></script>
+  <!-- YouboraLib plugin and adapter -->
+  <script src="http://smartplugin.youbora.com/v6/js/adapters/videojs5/6.1.2/sp.min.js"></script>
+</head>
+
+<body>
+  <h1>Page with video</h1>
+  <video id="video1" class="video-js vjs-default-skin" controls>
+      <source src="http://fastly.nicepeopleatwork.com.global.prod.fastly.net/video/sintel-1024-surround.mp4" type='video/mp4'>
+      <p class="vjs-no-js">To view this video please enable JavaScript.</p>
+    </video>
+  <script>
+    // Player init
+    window.player = videojs('video1')
+
+    // New instance of youbora
+    window.analytics = new youbora.Plugin({
+      'accountCode': 'yourAccount'
+    })
+    // This sends /nav
+    // Also initiates navigation if was not started
+    analytics.infinity.begin({
+      route: 'http://website.com/path/video.html',
+      page: 'Page with video'
+    })
+
+    // Player adapter
+    if (typeof youbora.adapters.Videojs5 != "undefined") {
+      window.plugin = new youbora.Plugin({
+        'accountCode': 'yourAccount',
+      })
+      plugin.setAdapter(new youbora.adapters.Videojs5(player))
+    }
+  </script>
+
+  <!-- navigate, will be tracked on the next page with begin -->
+  <a href="./index.html">Go to Index</a>
+  <a href="./page2.html">Go to page 2</a>
+</body>
+
+</html>

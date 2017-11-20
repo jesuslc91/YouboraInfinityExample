@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- YouboraLib plugin // no adapter -->
+  <script src="http://smartplugin.youbora.com/v6/js/lib/6.1.4/youboralib.min.js"></script>
+</head>
+
+<body>
+  <h1>Landing page</h1>
+  <script>
+      // New instance of youbora
+      window.analytics = new youbora.Plugin({
+        'accountCode': 'yourAccount'
+      })
+      // This sends /nav
+      // Also initiates navigation if was not started
+      analytics.infinity.begin({
+        route: 'http://website.com/path/landing',
+        page: 'Landing page title'
+      })
+
+  </script>
+  <!-- different ways to call events -->
+
+  <!-- 1) using onclick -->
+  <script>
+    function NotifyButton() {
+      //expected action
+      console.log("button pressed, sending event")
+      analytics.infinity.fireEvent({
+      name: 'event name 1'
+   })
+    }
+    </script>
+  <button id="button1" type="button" onclick="NotifyButton()">This button does something</button>
+  <!-- ------------------- -->
+
+
+
+  <!-- 2) using listeners -->
+  <button id="button2" type="button" onclick="console.log('hello')">This button does something too</button>
+  <script>
+    var buttonobject = document.getElementById("button2")
+    buttonobject.addEventListener('click', function() {
+      analytics.infinity.fireEvent({
+        name: 'event name 2'
+      })
+    })
+  </script>
+  <!-- ------------------- -->
+
+
+  <!--navigate, will be tracked on the next page with "begin" -->
+  <a href="./page2.html">Go to page 2</a>
+  <a href="./video.html">Go to video</a>
+</body>
+
+</html>

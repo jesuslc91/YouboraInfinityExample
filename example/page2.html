@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- YouboraLib plugin // no adapter -->
+  <script src="http://smartplugin.youbora.com/v6/js/lib/6.1.4/youboralib.min.js"></script>
+</head>
+
+<body>
+  <h1>Page 2 title</h1>
+  <script>
+    // New instance of youbora
+    window.analytics = new youbora.Plugin({
+      'accountCode': 'yourAccount'
+    })
+    // This sends /nav
+    // Also initiates navigation if was not started
+    analytics.infinity.begin({
+      route: 'http://website.com/path/page2.html',
+      page: 'Second page title'
+    })
+  </script>
+
+  <!-- simulate navigation event, like SPA -->
+  <button id="button" type="button">This does a navigation event, like SPA</button>
+  <script>
+    var buttonobject = document.getElementById("button")
+    buttonobject.addEventListener('click', function() {
+      // Call this when navigating
+      analytics.infinity.begin({
+        route: 'http://website.com/path/landing',
+        page: 'Page 2 title, SPA navigation 1'
+      })
+      // -------
+    })
+  </script>
+
+    <!-- navigate, will be tracked on the next page with begin -->
+    <a href="./index.html">Go to Index</a>
+    <a href="./video.html">Go to video</a>
+</body>
+
+</html>

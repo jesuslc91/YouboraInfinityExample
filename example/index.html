@@ -11,13 +11,16 @@
   <script>
       // New instance of youbora
       window.analytics = new youbora.Plugin({
-        'accountCode': 'yourAccount'
+        'accountCode': 'yourAccount',
+        'isInfinity': true,
+        'username': "testuser"
       })
       // This sends /nav
       // Also initiates navigation if was not started
       analytics.infinity.begin({
-        route: 'http://website.com/path/landing',
-        page: 'Landing page title'
+        // if you want to use different route/page than the browser's one
+        //route: 'http://website.com/path/landing',
+        //page: 'Landing page title'
       })
 
   </script>
@@ -28,7 +31,7 @@
     function NotifyButton() {
       //expected action
       console.log("button pressed, sending event")
-      analytics.infinity.fireEvent('event name 1')
+      analytics.infinity.fireEvent('event name 1') // as 2nd argument you can send a json with dimensions, and 3rd argument for values (numeric type)
     }
     </script>
   <button id="button1" type="button" onclick="NotifyButton()">This button does something</button>
@@ -41,7 +44,7 @@
   <script>
     var buttonobject = document.getElementById("button2")
     buttonobject.addEventListener('click', function() {
-      analytics.infinity.fireEvent('event name 2')
+      analytics.infinity.fireEvent('event name 2', {dimension1: "dim1", dimension2: "dim2"}, {value1:100,value2:200}) //example of dimensions and values
     })
   </script>
   <!-- ------------------- -->

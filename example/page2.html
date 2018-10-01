@@ -11,13 +11,15 @@
   <script>
     // New instance of youbora
     window.analytics = new youbora.Plugin({
-      'accountCode': 'yourAccount'
+      'accountCode': 'yourAccount',
+      'isInfinity': true,
+      'username': "testuser"
     })
     // This sends /nav
     // Also initiates navigation if was not started
     analytics.infinity.begin({
-      route: 'http://website.com/path/page2.html',
-      page: 'Second page title'
+      route: 'http://website.com/path/page2.html', //replacing the actual route with this one
+      page: 'Second page title' //and the page title with this one
     })
   </script>
 
@@ -27,7 +29,7 @@
     var buttonobject = document.getElementById("button")
     buttonobject.addEventListener('click', function() {
       // Call this when navigating
-      analytics.infinity.begin({
+      analytics.infinity.begin({ // you can call fireNav instead
         route: 'http://website.com/path/landing',
         page: 'Page 2 title, SPA navigation 1'
       })

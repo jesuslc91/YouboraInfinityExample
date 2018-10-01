@@ -3,7 +3,7 @@
 
 <head>
   <!-- YouboraLib plugin // no adapter -->
-  <script src="http://smartplugin.youbora.com/v6/js/lib/6.1.4/youboralib.min.js"></script>
+  <script src="http://smartplugin.youbora.com/v6/js/lib/6.4.8/youboralib.min.js"></script>
 </head>
 
 <body>
@@ -28,9 +28,7 @@
     function NotifyButton() {
       //expected action
       console.log("button pressed, sending event")
-      analytics.infinity.fireEvent({
-      name: 'event name 1'
-   })
+      analytics.infinity.fireEvent('event name 1')
     }
     </script>
   <button id="button1" type="button" onclick="NotifyButton()">This button does something</button>
@@ -43,9 +41,7 @@
   <script>
     var buttonobject = document.getElementById("button2")
     buttonobject.addEventListener('click', function() {
-      analytics.infinity.fireEvent({
-        name: 'event name 2'
-      })
+      analytics.infinity.fireEvent('event name 2')
     })
   </script>
   <!-- ------------------- -->

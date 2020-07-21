@@ -16,14 +16,16 @@
       <p class="vjs-no-js">To view this video please enable JavaScript.</p>
     </video>
   <script>
-    // Player init
-    window.player = videojs('video1')
-
     // New instance of youbora
     window.analytics = new youbora.Plugin({
-      'accountCode': 'yourAccount',
-      'isInfinity': true,
-      'username': "testuser"
+      accountCode: 'powerdev',
+      'user.name': 'testuser',
+      'content.metrics': {
+        'myCustomMetricForVideo': 200
+      },
+      'session.metrics': {
+        'myCustomMetricForSessions': 300
+      }
     })
     // This sends /nav
     // Also initiates navigation if was not started
@@ -32,15 +34,28 @@
       page: 'Page with video'
     })
 
+    // Player init
+    window.player = videojs('video1')
     // Player adapter
-    if (typeof youbora.adapters.Videojs5 != "undefined") {
-      window.plugin = new youbora.Plugin({
-        'accountCode': 'yourAccount',
-      })
-      plugin.setAdapter(new youbora.adapters.Videojs5(player))
+    if (window.analytics) {
+      analytics.setAdapter(new youbora.adapters.Videojs(player))
     }
-  </script>
 
+  </script>
+  <br />
+  <button id="session custom event" onclick="analytics.infinity.fireEvent('sessionCustomEvent', {dimension1: 'dim1'},{value1: '123'})"">Session Event</button>
+  <br />
+  <label>Dimension custom value:</label>
+  <input type="dimension1" id="dim1" name="dim1"><br><br>
+  <button id="session custom event" onclick="analytics.infinity.fireEvent('sessionCustomEvent2', {dimension1: document.getElementById('dim1').value},{value1: '123'})"">Session Event custom param</button>
+  <br />
+  <button id="video custom event" onclick="analytics.getAdapter().fireEvent('videoCustomEvent1', {dimension1: 'dim1'},{value1: '123'})">Video Event 1</button>
+  <br />
+  <button id="video custom event" onclick="analytics.getAdapter().fireEvent('videoCustomEvent2', {dimension1: 'dim2'},{value1: '1234'})">Video Event 2</button>
+  <br />
+
+  <button id="random" onclick="analytics.setOptions({'content.program': btoa(Date.now())})">Random new cdn name</button>
+  <br />
   <!-- navigate, will be tracked on the next page with begin -->
   <a href="./index.html">Go to Index</a>
   <a href="./page2.html">Go to page 2</a>

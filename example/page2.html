@@ -3,7 +3,7 @@
 
 <head>
   <!-- YouboraLib plugin // no adapter -->
-  <script src="http://smartplugin.youbora.com/v6/js/lib/6.4.8/youboralib.min.js"></script>
+  <script src="http://qa-smartplugin.youbora.com/catalog/v6/js/lib/last-build/dist/youboralib.min.js"></script>
 </head>
 
 <body>
@@ -11,9 +11,8 @@
   <script>
     // New instance of youbora
     window.analytics = new youbora.Plugin({
-      'accountCode': 'yourAccount',
-      'isInfinity': true,
-      'username': "testuser"
+      accountCode: 'powerdev',
+      'user.name': 'testuser'
     })
     // This sends /nav
     // Also initiates navigation if was not started
@@ -29,7 +28,7 @@
     var buttonobject = document.getElementById("button")
     buttonobject.addEventListener('click', function() {
       // Call this when navigating
-      analytics.infinity.begin({ // you can call fireNav instead
+      analytics.infinity.fireNav({
         route: 'http://website.com/path/landing',
         page: 'Page 2 title, SPA navigation 1'
       })

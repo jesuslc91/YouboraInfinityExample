@@ -3,7 +3,7 @@
 
 <head>
   <!-- YouboraLib plugin // no adapter -->
-  <script src="http://smartplugin.youbora.com/v6/js/lib/6.4.8/youboralib.min.js"></script>
+  <script src="http://qa-smartplugin.youbora.com/catalog/v6/js/lib/last-build/dist/youboralib.min.js"></script>
 </head>
 
 <body>
@@ -11,9 +11,8 @@
   <script>
       // New instance of youbora
       window.analytics = new youbora.Plugin({
-        'accountCode': 'yourAccount',
-        'isInfinity': true,
-        'username': "testuser"
+        accountCode: 'powerdev',
+        'user.name': 'testuser'
       })
       // This sends /nav
       // Also initiates navigation if was not started
@@ -24,6 +23,13 @@
       })
 
   </script>
+  <button id="sstart" onclick="analytics.infinity.newSession()" >Session Start</button>
+  <button id="sstop" onclick="analytics.infinity.fireSessionStop()">Session Stop</button>
+  <button id="nav" onclick="analytics.infinity.fireNav()">Nav</button>
+  <button id="clear" onclick="localStorage.clear(); sessionStorage.clear()">Clear Storage</button>
+  <br/>
+  <br/>
+
   <!-- different ways to call events -->
 
   <!-- 1) using onclick -->
@@ -31,7 +37,7 @@
     function NotifyButton() {
       //expected action
       console.log("button pressed, sending event")
-      analytics.infinity.fireEvent('event name 1') // as 2nd argument you can send a json with dimensions, and 3rd argument for values (numeric type)
+      analytics.infinity.fireEvent('event1') // as 2nd argument you can send a json with dimensions, and 3rd argument for values (numeric type)
     }
     </script>
   <button id="button1" type="button" onclick="NotifyButton()">This button does something</button>
@@ -44,11 +50,10 @@
   <script>
     var buttonobject = document.getElementById("button2")
     buttonobject.addEventListener('click', function() {
-      analytics.infinity.fireEvent('event name 2', {dimension1: "dim1", dimension2: "dim2"}, {value1:100,value2:200}) //example of dimensions and values
+      analytics.infinity.fireEvent('event2', {dimension1: "dim1", dimension2: "dim2"}, {value1:100,value2:200}) //example of dimensions and values
     })
   </script>
   <!-- ------------------- -->
-
 
   <!--navigate, will be tracked on the next page with "begin" -->
   <a href="./page2.html">Go to page 2</a>
